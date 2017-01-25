@@ -15,15 +15,15 @@
         android:text="Hello World!" />
 
     <Button
-        android:text="Button"
+        android:text="Next Activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button"
         android:onClick="buttonClick" />
 
-    <RadioButton
-        android:text="RadioButton"
+    <Button
+        android:text="screen 3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/radioButton" />
+        android:id="@+id/screen_three_button" />
 </LinearLayout>
