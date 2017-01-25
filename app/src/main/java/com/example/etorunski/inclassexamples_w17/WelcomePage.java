@@ -41,26 +41,37 @@ public class WelcomePage extends AppCompatActivity implements SensorEventListene
             @Override
             public void onClick(View view) {
 
+                //Create an intent to view a website:
                 String url = "http://www.google.com";
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
-                startActivity(i);
+                //set 100 as the request code. This will be returned in onActivityResult:
+                startActivityForResult(i, 100);
             }
         });
+
+
         //get a reference to the vibration motor:
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
 
+        //Open a file for storing shared preferences:
         SharedPreferences prefs = getSharedPreferences("myFileName", Context.MODE_PRIVATE);
+
+        //Read the number of times run in the file:
         int numTimesRun = prefs.getInt("TIMES_RUN", 0);
 
+        //Get an editor object for writing to the file:
         SharedPreferences.Editor writer = prefs.edit();
         writer.putInt("TIMES_RUN", numTimesRun+1);
         writer.putString("USER", "ERIC");
+
+        //Write the file:
         writer.commit();
 
 
         Log.d("Main", "OnCreate");
+
         // get a reference to the Gyroscope sensor:
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if(mSensorManager != null) {
@@ -77,12 +88,13 @@ public class WelcomePage extends AppCompatActivity implements SensorEventListene
             v.vibrate(500);
 
 
+        //Start the Screen_Two activity, with 10 as the result code
         Intent nextActivity = new Intent(this, screen_two.class);
-
         nextActivity.putExtra("LoginName", "Eric");
         nextActivity.putExtra("API", 22);
-        startActivityForResult(nextActivity,0);
+        startActivityForResult(nextActivity,10);
     }
+
 
     //This tells you if the accuracy of a sensor has changed, like the GPS accuracy
     public void onAccuracyChanged(Sensor sens, int accuracy) {}
@@ -121,9 +133,14 @@ public class WelcomePage extends AppCompatActivity implements SensorEventListene
         Log.e("Main", "onStop");
     }
 
+
+    //This function gets called when another activity has finished and this activity is resuming:
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        String fromOtherActivity = data.getStringExtra("Payment");
-        Log.d("Main", "Back from  other activity: " + fromOtherActivity);
+        if(data != null)
+        {
+            String fromOtherActivity = data.getStringExtra("Payment");
+            Log.d("Main", "Back from  other activity: " + fromOtherActivity);
+        }
     }
 }
