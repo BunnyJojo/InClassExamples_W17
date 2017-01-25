@@ -1,5 +1,6 @@
 package com.example.etorunski.inclassexamples_w17;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,10 @@ public class screen_two extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_two);
 
+        Intent i = getIntent();
+   String name = i.getStringExtra("LoginName");
+        int api = i.getIntExtra("API", 0);
+    //    String name = getIntent().getExtras().getString("LoginName");
 
         //Get an object for the XML Button: button1
         Button b1 = (Button)findViewById(R.id.button1);
@@ -31,6 +36,10 @@ public class screen_two extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.i("Button1", "Button clicked");
+                Intent dataBack = new Intent();
+                dataBack.putExtra("Payment", "Declined");
+                setResult(5, dataBack);
+                finish();
             }
         });
 
