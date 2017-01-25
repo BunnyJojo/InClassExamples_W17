@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+
 public class WelcomePage extends AppCompatActivity implements SensorEventListener {
     Vibrator v ;
     private SensorManager mSensorManager;
@@ -39,27 +40,30 @@ public class WelcomePage extends AppCompatActivity implements SensorEventListene
 
         // get a reference to the Gyroscope sensor:
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        
+        if(mSensorManager != null) {
+            mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+            if (mSensor != null)
+                mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        }
     }
 
     //When you click the button, vibrate the phone for 500 milliseconds
     public void buttonClick( View whatWasClicked   )
     {
-        v.vibrate(500);
+        if(v != null)
+            v.vibrate(500);
     }
 
     //This tells you if the accuracy of a sensor has changed, like the GPS accuracy
-    public void onAccuracyChanged(Sensor sens, int accuracy)
-    {
-
-    }
+    public void onAccuracyChanged(Sensor sens, int accuracy) {}
 
     //This tells you what the new value read by the sensor is.
     public void onSensorChanged(SensorEvent evt)
     {
-        float light = evt.values[0];
-        Log.d("x is:" , ""+light + "," + evt.values[1] + " , " + evt.values[2]);
+        if(evt.values.length == 3)
+        {
+            float light = evt.values[0];
+            Log.d("x is:" , ""+light + "," + evt.values[1] + " , " + evt.values[2]);
+        }
     }
 }
