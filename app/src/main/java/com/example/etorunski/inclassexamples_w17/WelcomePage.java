@@ -22,17 +22,18 @@ public class WelcomePage extends AppCompatActivity implements SensorEventListene
     Vibrator v ;
     private SensorManager mSensorManager;
     private Sensor mSensor;
-
+    private Context ctx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         //Set the window to be full screen:
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+ctx = this;
 
         setContentView(R.layout.activity_welcome_page);
 
@@ -47,6 +48,15 @@ public class WelcomePage extends AppCompatActivity implements SensorEventListene
                 i.setData(Uri.parse(url));
                 //set 100 as the request code. This will be returned in onActivityResult:
                 startActivityForResult(i, 100);
+            }
+        });
+
+
+        Button listView = (Button)findViewById(R.id.listviewbutton);
+        listView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ctx, ListViewActivity.class));
             }
         });
 
