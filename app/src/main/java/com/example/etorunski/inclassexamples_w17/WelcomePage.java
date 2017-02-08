@@ -15,98 +15,76 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 
-public class WelcomePage extends AppCompatActivity implements SensorEventListener {
+public class WelcomePage extends AppCompatActivity  {
     Vibrator v ;
-    private SensorManager mSensorManager;
-    private Sensor mSensor;
+    private Context ctx;
+
+    private ListView theList;
+    private String [] examples = {"Sensors","Layouts", "Activities", "SharedPreferences", "ListView" };
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         //Set the window to be full screen:
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+ctx = this;
 
         setContentView(R.layout.activity_welcome_page);
-
-        Button screenThree = (Button)findViewById(R.id.screen_three_button);
-        screenThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //Create an intent to view a website:
-                String url = "http://www.google.com";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                //set 100 as the request code. This will be returned in onActivityResult:
-                startActivityForResult(i, 100);
-            }
-        });
 
 
         //get a reference to the vibration motor:
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
 
-        //Open a file for storing shared preferences:
-        SharedPreferences prefs = getSharedPreferences("myFileName", Context.MODE_PRIVATE);
+        theList = (ListView)findViewById(R.id.theList);
+        theList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        //Read the number of times run in the file:
-        int numTimesRun = prefs.getInt("TIMES_RUN", 0);
+                if(v != null)   v.vibrate(500); //Vibrate the phone for 500 milliseconds
 
-        //Get an editor object for writing to the file:
-        SharedPreferences.Editor writer = prefs.edit();
-        writer.putInt("TIMES_RUN", numTimesRun+1);
-        writer.putString("USER", "ERIC");
+                switch(position)
+                {
+                    case 0: //Sensors
+                        break;
+                    case 1: //Layouts
+                        //Start the Screen_Two activity, with 10 as the result code
+                        Intent nextActivity = new Intent(ctx, screen_two.class);
+                        nextActivity.putExtra("LoginName", "Eric");
+                        nextActivity.putExtra("API", 22);
+                        startActivityForResult(nextActivity,10);
+                        break;
+                    case 2: //screen 3
+                        startActivityForResult(new Intent(ctx,Screen_three.class ), 20);
+                        break;
+                    case 3:     //shared preferences
+                        startActivity(new Intent(ctx, SharedPreferencesActivity.class));
+                        break;
+                    case 4: //ListView activity
+                        startActivity(new Intent(ctx, ListViewActivity.class ));
 
-        //Write the file:
-        writer.commit();
+
+                        break;
+                }
+            }
+        });
+        theList.setAdapter(new ArrayAdapter<>(this, R.layout.row_layout, examples ));
+
 
 
         Log.d("Main", "OnCreate");
 
-        // get a reference to the Gyroscope sensor:
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        if(mSensorManager != null) {
-            mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-            if (mSensor != null)
-                mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-    }
-
-    //When you click the button, vibrate the phone for 500 milliseconds
-    public void buttonClick( View whatWasClicked   )
-    {
-        if(v != null)
-            v.vibrate(500);
-
-
-        //Start the Screen_Two activity, with 10 as the result code
-        Intent nextActivity = new Intent(this, screen_two.class);
-        nextActivity.putExtra("LoginName", "Eric");
-        nextActivity.putExtra("API", 22);
-        startActivityForResult(nextActivity,10);
-    }
-
-
-    //This tells you if the accuracy of a sensor has changed, like the GPS accuracy
-    public void onAccuracyChanged(Sensor sens, int accuracy) {}
-
-    //This tells you what the new value read by the sensor is.
-    public void onSensorChanged(SensorEvent evt)
-    {
-        if(evt.values.length == 3)
-        {
-            float light = evt.values[0];
-            Log.d("x is:" , ""+light + "," + evt.values[1] + " , " + evt.values[2]);
-        }
     }
 
     protected void onResume()

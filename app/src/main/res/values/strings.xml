@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">InClassExamples_W17</string>
     <string name="title_activity_secondactivity">secondactivity</string>
+    <string name="button_go_back">Go back</string>
 </resources>
