@@ -22,16 +22,19 @@ public class SQLActivity extends AppCompatActivity {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ListView theList = (ListView) findViewById(R.id.theList);
-     /*   ContentValues newValues = new ContentValues();
-        newValues.put(MyOpenHelper.NAME_COLUMN, "apple");
+  /*      ContentValues newValues = new ContentValues();
+        newValues.put(MyOpenHelper.NAME_COLUMN, "banana");
         newValues.put(MyOpenHelper.DESCRIPTION_COLUMN, "FRUIT");
-        newValues.put(MyOpenHelper.PRICE_COLUMN, "69");
+        newValues.put(MyOpenHelper.PRICE_COLUMN, "79");
 
         db.insert(MyOpenHelper.databaseName, "", newValues);
+
 */
-        Cursor results = db.query(false, MyOpenHelper.databaseName,
-                new String[] { MyOpenHelper.ID_COLUMN, MyOpenHelper.PRICE_COLUMN , MyOpenHelper.NAME_COLUMN},
-                "PRICE > ? AND NAME not null", new String[] {"50"}, null, null, null, null);
+
+        Cursor results = db.query(true, MyOpenHelper.databaseName,
+                new String[] { MyOpenHelper.ID_COLUMN, MyOpenHelper.DESCRIPTION_COLUMN , MyOpenHelper.NAME_COLUMN, MyOpenHelper.PRICE_COLUMN},
+                "PRICE > ? AND NAME > ?", new String[] {"50", "baa"}, null, null, null, null);
+
         int rows = results.getCount() ; //number of rows returned
         results.moveToFirst(); //move to first result
 
@@ -40,8 +43,15 @@ public class SQLActivity extends AppCompatActivity {
                 new int[] {     R.id.price_text,              R.id.name_text}, 0  //to layout ID
                 );
         theList.setAdapter( listAdapter );
-        /*
+
         int numColumns = results.getColumnCount();//how many columns are returned
+        for(int i = 0; i < numColumns; i++)
+        {
+            String columnName = results.getColumnName(i);
+            Log.i("SQL", "Column name:" + i + " = " +columnName);
+        }
+        /*
+
         int columnName = results.getColumnIndex(MyOpenHelper.NAME_COLUMN); //find the index of the name column
         int priceIndex = results.getColumnIndex(MyOpenHelper.PRICE_COLUMN);
 

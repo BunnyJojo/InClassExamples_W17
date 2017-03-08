@@ -23,7 +23,7 @@
         <activity android:name=".ListViewActivity" />
         <activity android:name=".SensorsActivity" />
         <activity android:name=".SharedPreferencesActivity" />
-        <activity android:name=".SQLActivity"></activity>
+        <activity android:name=".SQLActivity" />
     </application>
 
 </manifest>

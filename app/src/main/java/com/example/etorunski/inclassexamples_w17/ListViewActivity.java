@@ -32,7 +32,7 @@ protected String dataItems[]  = new String[] { "Item1", "Item2", "Item 3", "item
         theList = (ListView)findViewById(R.id.theList);
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.row_layout, dataItems);
         theList.setAdapter( new MyCustomAdapter());
-
+//              notifyDatasetChanged()
         theList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

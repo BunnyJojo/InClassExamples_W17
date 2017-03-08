@@ -8,6 +8,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 public class WelcomePage extends AppCompatActivity  {
@@ -26,12 +28,15 @@ public class WelcomePage extends AppCompatActivity  {
     private Context ctx;
 
     private ListView theList;
-    private String [] examples = {"Sensors","Layouts", "Activities", "SharedPreferences", "ListView" , "Databases"};
+    private String [] examples = {"Sensors","Layouts", "Activities", "SharedPreferences",
+            "ListView" , "Databases", "AsyncTask"};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
 
         //Set the window to be full screen:
@@ -77,6 +82,9 @@ public class WelcomePage extends AppCompatActivity  {
                     case 5:
                         startActivity(new Intent(ctx, SQLActivity.class));
                         break;
+                    case 6:
+                        //startActivity(new Intent(ctx, NavigationDrawerActivity.class));
+                        break;
                 }
             }
         });
@@ -84,6 +92,7 @@ public class WelcomePage extends AppCompatActivity  {
 
 
 
+        //t.run();
         Log.d("Main", "OnCreate");
 
     }

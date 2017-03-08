@@ -22,6 +22,7 @@ public class SharedPreferencesActivity extends AppCompatActivity {
 
         //Read the number of times run in the file:
         String previousName= prefs.getString("USER", "NONE");
+        int myNum = prefs.getInt("name", 10);
 
         storedName.setText(previousName);
         Button b = (Button)findViewById(R.id.go_back_button);

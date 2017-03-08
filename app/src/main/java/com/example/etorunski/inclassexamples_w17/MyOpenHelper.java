@@ -1,5 +1,6 @@
 package com.example.etorunski.inclassexamples_w17;
 
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -24,18 +25,22 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db) //only called if not yet created
     {
-        db.execSQL("CREATE TABLE " + databaseName + "(+" + ID_COLUMN + " INTEGER PRIMARY KEY, "+
-                NAME_COLUMN+ " VARCHAR(256), "+
+        db.execSQL("CREATE TABLE " + databaseName + "(" + ID_COLUMN + " INTEGER PRIMARY KEY, "+
+                    NAME_COLUMN+ " VARCHAR(4), "+
                 DESCRIPTION_COLUMN+" text, "+
                 PRICE_COLUMN+ " INTEGER);" );
     }
 
+
+    //This function gets called if the version of the database has increased
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         db.execSQL("DROP TABLE IF EXISTS " + databaseName);
         onCreate(db);
     }
 
+
+    //This function gets called if the version of the database has decreased
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         db.execSQL("DROP TABLE IF EXISTS " + databaseName);
