@@ -8,6 +8,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 public class WelcomePage extends AppCompatActivity  {
@@ -26,7 +28,8 @@ public class WelcomePage extends AppCompatActivity  {
     private Context ctx;
 
     private ListView theList;
-    private String [] examples = {"Sensors","Layouts", "Activities", "SharedPreferences", "ListView" };
+    private String [] examples = {"Sensors","Layouts", "Activities", "SharedPreferences",
+            "ListView" , "Databases", "AsyncTask"};
 
 
     @Override
@@ -34,11 +37,13 @@ public class WelcomePage extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
 
 
+
+
         //Set the window to be full screen:
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-ctx = this;
+        ctx = this;
 
         setContentView(R.layout.activity_welcome_page);
 
@@ -73,8 +78,12 @@ ctx = this;
                         break;
                     case 4: //ListView activity
                         startActivity(new Intent(ctx, ListViewActivity.class ));
-
-
+                        break;
+                    case 5:
+                        startActivity(new Intent(ctx, SQLActivity.class));
+                        break;
+                    case 6:
+                        //startActivity(new Intent(ctx, NavigationDrawerActivity.class));
                         break;
                 }
             }
@@ -83,6 +92,7 @@ ctx = this;
 
 
 
+        //t.run();
         Log.d("Main", "OnCreate");
 
     }

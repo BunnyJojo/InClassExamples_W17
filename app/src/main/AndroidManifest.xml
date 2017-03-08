@@ -22,7 +22,8 @@
         <activity android:name=".Screen_three" />
         <activity android:name=".ListViewActivity" />
         <activity android:name=".SensorsActivity" />
-        <activity android:name=".SharedPreferencesActivity"></activity>
+        <activity android:name=".SharedPreferencesActivity" />
+        <activity android:name=".SQLActivity" />
     </application>
 
 </manifest>
