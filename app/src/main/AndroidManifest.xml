@@ -24,6 +24,7 @@
         <activity android:name=".SensorsActivity" />
         <activity android:name=".SharedPreferencesActivity" />
         <activity android:name=".SQLActivity" />
+        <activity android:name=".AsyncExample"></activity>
     </application>
 
 </manifest>

@@ -16,6 +16,12 @@ public class screen_two extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_two);
 
+try{
+    Thread.sleep(6000);
+}catch(Exception e)
+{
+
+}
         Intent i = getIntent();
    String name = i.getStringExtra("LoginName");
         int api = i.getIntExtra("API", 0);
