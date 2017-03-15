@@ -83,7 +83,7 @@ public class WelcomePage extends AppCompatActivity  {
                         startActivity(new Intent(ctx, SQLActivity.class));
                         break;
                     case 6:
-                        //startActivity(new Intent(ctx, NavigationDrawerActivity.class));
+                        startActivity(new Intent(ctx, AsyncExample.class));
                         break;
                 }
             }
