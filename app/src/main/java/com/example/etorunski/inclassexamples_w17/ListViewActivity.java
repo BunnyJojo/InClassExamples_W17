@@ -1,6 +1,7 @@
 package com.example.etorunski.inclassexamples_w17;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,19 +17,20 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ListViewActivity extends AppCompatActivity {
+public class ListViewActivity extends Activity {
 
     protected ListView theList;
     protected int numItems = 4;
 private static String TAG = "LISTVIEW";
-
+private boolean isTablet;
 
 protected String dataItems[]  = new String[] { "Item1", "Item2", "Item 3", "item4", " ","more items"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_list_view);
+        setContentView(R.layout.activity_list_view); //chooses tablet or phone layout
+
         theList = (ListView)findViewById(R.id.theList);
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.row_layout, dataItems);
         theList.setAdapter( new MyCustomAdapter());
@@ -38,8 +40,32 @@ protected String dataItems[]  = new String[] { "Item1", "Item2", "Item 3", "item
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.d(TAG, "onItemClick: " + i + " " + l);
 
+
+                Bundle bun = new Bundle();
+                bun.putLong("ID", l );//l is the database ID of selected item
+
+
+                //step 2, if a tablet, insert fragment into FrameLayout, pass data
+                if(isTablet) {
+                    ListDetailsFragment frag = new ListDetailsFragment();
+
+                    frag.setArguments(bun);
+
+                    getFragmentManager().beginTransaction().add(R.id.fragmentHolder, frag).commit();
+                }
+                //step 3 if a phone, transition to empty Activity that has FrameLayout
+                else //isPhone
+                {
+                    Intent intnt = new Intent(ListViewActivity.this, FragmentDetailsActivity.class);
+                    intnt.putExtra("ID" , l); //pass the Database ID to next activity
+                    startActivity(intnt); //go to view fragment details
+                }
             }
         });
+
+        //step 1, find out if you are on a phone or tablet.
+        isTablet = (findViewById(R.id.fragmentHolder) != null); //find out if this is a phone or tablet
+
 
         //adapter.notifyDataSetChanged(); //tells the list to update the data
     }
@@ -69,7 +95,7 @@ protected String dataItems[]  = new String[] { "Item1", "Item2", "Item 3", "item
                 loaded = loader.inflate(R.layout.row_layout_left, null);
                 TextView tv = (TextView)loaded.findViewById(R.id.texthere);
                 tv.setText( getItem(position)  );
-                CheckBox cb = (CheckBox)loaded.findViewById(R.id.checkbox);
+                /*CheckBox cb = (CheckBox)loaded.findViewById(R.id.checkbox);
                 cb.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -77,6 +103,7 @@ protected String dataItems[]  = new String[] { "Item1", "Item2", "Item 3", "item
                     }
                 });
                 cb.setChecked( position<1  ); //0 selected, 1 not selected
+                */
             }
             else
             {
@@ -84,7 +111,7 @@ protected String dataItems[]  = new String[] { "Item1", "Item2", "Item 3", "item
                 loaded = loader.inflate(R.layout.row_layout_right, null);
                 TextView tv = (TextView)loaded.findViewById(R.id.texthere);
                 tv.setText( getItem(position)  );
-                RadioButton cb = (RadioButton)loaded.findViewById(R.id.radioButton);
+               /* RadioButton cb = (RadioButton)loaded.findViewById(R.id.radioButton);
                 cb.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -92,6 +119,7 @@ protected String dataItems[]  = new String[] { "Item1", "Item2", "Item 3", "item
                     }
                 });
                 cb.setChecked( position<3  ); //0 selected, 1 not selected
+                */
             }
 
             return loaded;

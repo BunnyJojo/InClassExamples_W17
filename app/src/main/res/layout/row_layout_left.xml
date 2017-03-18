@@ -12,12 +12,12 @@
     android:gravity="left"
         android:text="Text here"/>
 
-    <CheckBox
+    <!--CheckBox
         android:text="CheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/checkbox"
-        android:layout_weight="1" />
+        android:layout_weight="1" /-->
 
 
 </LinearLayout>
