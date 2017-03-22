@@ -29,7 +29,7 @@ public class WelcomePage extends AppCompatActivity  {
 
     private ListView theList;
     private String [] examples = {"Sensors","Layouts", "Activities", "SharedPreferences",
-            "ListView" , "Databases", "AsyncTask"};
+            "ListView" , "Databases", "AsyncTask", "Navigation bar"};
 
 
     @Override
@@ -84,6 +84,9 @@ public class WelcomePage extends AppCompatActivity  {
                         break;
                     case 6:
                         startActivity(new Intent(ctx, AsyncExample.class));
+                        break;
+                    case 7: //navigation bar
+                        startActivity(new Intent(ctx, NavigationBarExample.class));
                         break;
                 }
             }

@@ -10,4 +10,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="menu_item1">one go here</string>
+    <string name="menu_item2">two goes here</string>
+    <string name="menu_item3">three goes here</string>
 </resources>
