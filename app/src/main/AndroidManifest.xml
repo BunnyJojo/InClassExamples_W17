@@ -24,7 +24,8 @@
         <activity android:name=".SensorsActivity" />
         <activity android:name=".SharedPreferencesActivity" />
         <activity android:name=".SQLActivity" />
-        <activity android:name=".AsyncExample"></activity>
+        <activity android:name=".AsyncExample"/>
+        <activity android:name=".FragmentDetailsActivity"/>
     </application>
 
 </manifest>
