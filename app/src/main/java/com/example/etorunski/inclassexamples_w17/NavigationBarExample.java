@@ -58,8 +58,11 @@ Context ctx;
 
 
                 LayoutInflater inflater = getLayoutInflater();
-View v = inflater.inflate(R.layout.activity_screen_two, null); //v is a RelativeLayout
-Button b = (Button)v.findViewById(R.id.button1);
+
+
+                View v = inflater.inflate(R.layout.activity_screen_two, null); //v is a RelativeLayout
+
+                Button b = (Button)v.findViewById(R.id.button1);
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -102,7 +105,7 @@ Button b = (Button)v.findViewById(R.id.button1);
                                  NotificationCompat.Builder mBuilder =
                                          new NotificationCompat.Builder(ctx)
                                                  .setSmallIcon(R.drawable.dogicon)
-                                                 .extend(wearableExtender)   // <---  this sends the notification to my watch
+                                                 .extend(wearableExtender)   // <---  this line sends the notification to my watch
                                                  .setContentTitle("My notification")
                                                  .setContentText("Hello World!");
 

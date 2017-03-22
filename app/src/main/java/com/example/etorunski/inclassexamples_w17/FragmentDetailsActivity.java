@@ -2,6 +2,7 @@ package com.example.etorunski.inclassexamples_w17;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 /**
@@ -31,5 +32,7 @@ public class FragmentDetailsActivity extends Activity {
 
 
     }
+
+
 
 }

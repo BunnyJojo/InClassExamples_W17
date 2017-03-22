@@ -12,7 +12,7 @@ public class Screen_three extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_three);
 
-        Button backButton =(Button) findViewById(R.id.backButton);
+        Button backButton =(Button) findViewById(R.id.sayButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
