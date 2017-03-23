@@ -51,7 +51,7 @@ protected String dataItems[]  = new String[] { "Item1", "Item2", "Item 3", "item
 
                     frag.setArguments(bun);
 
-                    getFragmentManager().beginTransaction().add(R.id.fragmentHolder, frag).commit();
+                    getFragmentManager().beginTransaction().replace(R.id.fragmentHolder, frag).commit();
                 }
                 //step 3 if a phone, transition to empty Activity that has FrameLayout
                 else //isPhone
